@@ -1,0 +1,2 @@
+Get png's from pdf:
+convert [Masecet].pdf [Masecet]%d.png
