@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Sun Apr 24 17:42:51 2011
+** Created: Fri May 13 13:43:40 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,24 +33,25 @@ static const uint qt_meta_data_MainWindow[] = {
  // slots: signature, parameters, type, tag, flags
       20,   12,   11,   11, 0x0a,
       36,   11,   11,   11, 0x08,
-      57,   11,   11,   11, 0x08,
-      78,   11,   11,   11, 0x08,
-     105,   11,   11,   11, 0x08,
-     136,  128,   11,   11, 0x08,
-     162,  128,   11,   11, 0x08,
-     188,   11,   11,   11, 0x08,
-     219,  213,   11,   11, 0x08,
-     249,  213,   11,   11, 0x08,
-     282,  278,   11,   11, 0x08,
-     309,   11,   11,   11, 0x08,
+      60,   11,   11,   11, 0x08,
+      81,   11,   11,   11, 0x08,
+     102,   11,   11,   11, 0x08,
+     129,   11,   11,   11, 0x08,
+     160,  152,   11,   11, 0x08,
+     186,  152,   11,   11, 0x08,
+     212,   11,   11,   11, 0x08,
+     243,  237,   11,   11, 0x08,
+     273,  237,   11,   11, 0x08,
+     306,  302,   11,   11, 0x08,
+     333,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
     "MainWindow\0\0message\0update(QString)\0"
-    "on_nextBTN_clicked()\0on_prevBTN_clicked()\0"
-    "on_saveLayoutBTN_clicked()\0"
+    "on_toolButton_clicked()\0on_nextBTN_clicked()\0"
+    "on_prevBTN_clicked()\0on_saveLayoutBTN_clicked()\0"
     "on_reprocBTN_clicked()\0checked\0"
     "on_whiteBTN_clicked(bool)\0"
     "on_blackBTN_clicked(bool)\0"
@@ -90,20 +91,21 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: update((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 1: on_nextBTN_clicked(); break;
-        case 2: on_prevBTN_clicked(); break;
-        case 3: on_saveLayoutBTN_clicked(); break;
-        case 4: on_reprocBTN_clicked(); break;
-        case 5: on_whiteBTN_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 6: on_blackBTN_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 7: on_openfileBTN_clicked(); break;
-        case 8: mousePressEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 9: mouseMoveEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 10: valueChangeRequest((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
-        case 11: showHelp(); break;
+        case 1: on_toolButton_clicked(); break;
+        case 2: on_nextBTN_clicked(); break;
+        case 3: on_prevBTN_clicked(); break;
+        case 4: on_saveLayoutBTN_clicked(); break;
+        case 5: on_reprocBTN_clicked(); break;
+        case 6: on_whiteBTN_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: on_blackBTN_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 8: on_openfileBTN_clicked(); break;
+        case 9: mousePressEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
+        case 10: mouseMoveEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
+        case 11: valueChangeRequest((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
+        case 12: showHelp(); break;
         default: ;
         }
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

@@ -49,6 +49,7 @@ public slots:
     void update(QString message);
 
 private slots:
+    void on_toolButton_clicked();
     void on_nextBTN_clicked();
     void on_prevBTN_clicked();
     void on_saveLayoutBTN_clicked();

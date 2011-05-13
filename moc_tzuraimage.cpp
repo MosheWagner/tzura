@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'tzuraimage.h'
 **
-** Created: Sun Apr 24 16:50:28 2011
+** Created: Fri May 13 13:43:43 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!

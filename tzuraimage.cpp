@@ -83,16 +83,28 @@ void TzuraImage::process(bool firstTime)
     //Pass the image through filters to remove noise
     emit message("Filtering image...");
 
-    //Filter image:
+
     SingleLineYFilter();
+
+    //Crop edges:
+    cropEdges();
+
+    //Filter image:
     SingleLineXFilter();
-    strongFilter(10);
 
     lastWordInBlockFilter();
 
     SingleLineYFilter();
     SingleLineXFilter();
-    strongFilter(5);
+    //strongFilter(5);
+
+    //strongFilter(14);
+    strongFilter(14);
+
+    SingleLineYFilter();
+    SingleLineXFilter();
+
+    //connectivityFilter();
 
     /*
     //Show pixilized image
@@ -111,6 +123,11 @@ void TzuraImage::process(bool firstTime)
     ui->label_2->setPixmap(QPixmap::fromImage(nimg));
     */
 
+
+
+    /*
+     /////////////
+
     //See if it has a layout file already
     QFile f(imagePath.replace(".png", ".layout"));
 
@@ -119,6 +136,7 @@ void TzuraImage::process(bool firstTime)
         drawSavedRects(imagePath.replace(".png", ".layout"));
     }
     else
+    */
     {
 
         //Growing-Squares method
@@ -127,6 +145,8 @@ void TzuraImage::process(bool firstTime)
         findSquares(squareBorderSensitivity, 10);
 
         //addSquares();
+
+        findSquares(squareBorderSensitivity, 2);
 
         joinSquares();
 
@@ -271,30 +291,134 @@ void TzuraImage::strongFilter(int squareSize)
             if (ImgArray[0]->at(i,j) == 0) //Is black
             {
                 //Find an (almost) full line of blacks
-                bool safe = false;
+                int safe = 0;
 
                 //Up:
                 int c = 0;
                 for (int m=j-n; m<j; m++) if (ImgArray[0]->at(i,m) == 0) c++;
-                if (c > n * 0.7) safe = true;
+                if (c > n * 0.8)
+                {
+                    safe++;
+
+                    //See if this can b done even further
+                    c = 0;
+                    for (int m=j-n-n; m<j-n; m++) if (ImgArray[0]->at(i,m) == 0) c++;
+                    if (c > n * 0.8) safe++;
+                }
 
                 //Right:
                 c = 0;
                 for (int l=i; l<i+n; l++) if (ImgArray[0]->at(l,j) == 0) c++;
-                if (c > n * 0.7) safe = true;
+                if (c > n * 0.8)
+                {
+                    safe++;
+
+                    c = 0;
+                    for (int l=i+n; l<i+n+n; l++) if (ImgArray[0]->at(l,j) == 0) c++;
+                    if (c > n * 0.8) safe++;
+                }
 
                 //Down:
                 c = 0;
                 for (int m=j; m<j+n; m++) if (ImgArray[0]->at(i,m) == 0) c++;
-                if (c > n * 0.7) safe = true;
+                if (c > n * 0.8)
+                {
+                    safe++;
+
+                    c = 0;
+                    for (int m=j+n; m<j+n+n; m++) if (ImgArray[0]->at(i,m) == 0) c++;
+                    if (c > n * 0.8) safe++;
+                }
 
                 //Left:
                 c = 0;
                 for (int l=i-n; l<i; l++) if (ImgArray[0]->at(l,j) == 0) c++;
-                if (c > n * 0.7) safe = true;
+                if (c > n * 0.8)
+                {
+                    safe++;
+
+                    c = 0;
+                    for (int l=i-n-n; l<i-n; l++) if (ImgArray[0]->at(l,j) == 0) c++;
+                    if (c > n * 0.8) safe++;
+                }
 
 
-                if (safe == false) ImgArray[0]->set(i,j,1);
+                if (safe < 2) ImgArray[0]->set(i,j,1);
+            }
+        }
+    }
+}
+
+//Crop the image so only the internal gmara-rashi-tosfot square is left
+void TzuraImage::cropEdges()
+{
+    int l = 0, r = 0;
+
+    //Left
+    for (int i=0; i<RES_X / 4; i++)
+    {
+        int c = 0;
+        for (int j=0; j < RES_Y * 0.75; j++) if (ImgArray[0]->at(i,j) == 0 ) c++;
+
+        if (c > (RES_Y * 0.75) * 0.9)
+        {
+            l = i;
+
+            for (int n=0; n<=i; n++)
+            {
+                for (int m=0; m<RES_Y; m++) ImgArray[0]->set(n,m,3);
+            }
+        }
+    }
+
+    //Right
+    for (int i=RES_X - 1; i>RES_X * 0.75; i--)
+    {
+        int c = 0;
+        for (int j=0; j < RES_Y * 0.75; j++) if (ImgArray[0]->at(i,j) == 0 ) c++;
+
+        if (c > (RES_Y * 0.75) * 0.9)
+        {
+            r = i + 1;
+
+            for (int n=RES_X - 1; n>i; n--)
+            {
+                for (int m=0; m<RES_Y; m++) ImgArray[0]->set(n,m,3);
+            }
+        }
+    }
+
+    //Top
+    for (int j=0; j<RES_Y / 7; j++)
+    {
+        int c = 0;
+        for (int i=l; i<r; i++) if (ImgArray[0]->at(i,j) == 0) c++;
+
+        if (c > (r-l) * 0.96)
+        {
+            for (int m=0; m<=j; m++)
+            {
+                for (int n=0; n<RES_X; n++)
+                {
+                    //Cheating...
+                    if ( abs(RES_X /2 - n) < 20) ImgArray[0]->set(n,m,0);
+                    else ImgArray[0]->set(n,m,3);
+                }
+            }
+        }
+    }
+
+    //Bottom
+    for (int j=RES_Y - 1; j>RES_Y * 0.75; j--)
+    {
+        int c = 0;
+        for (int i=l; i<r; i++) if (ImgArray[0]->at(i,j) == 0) c++;
+
+        if (c > (r-l) * 0.9)
+        {
+            for (int m=RES_Y - 1; m >= j; m--)
+            {
+                for (int n=0; n<RES_X; n++) ImgArray[0]->set(n,m,3);
             }
         }
     }
@@ -337,7 +461,7 @@ void TzuraImage::lastWordInBlockFilter()
                     if (c > 18)
                     {
                         c = 0;
-                        for (int t=1; t<8; t++) if (ImgArray[0]->at(a.x() - t, l) == 0) c++;
+                        for (int t=1; t<8; t++) if (ImgArray[0]->at(a.x() - t, l) != 1) c++;
 
                         //Remove the white patch
                         if (c > 6)
@@ -565,11 +689,11 @@ void TzuraImage::addSquares()
 //Paint the blocks so they look cool
 QImage TzuraImage::render(int layer, bool grid)
 {
-    int w = (int) (1500 / XY_RATIO);
-    QImage newImage(w, 1500, QImage::Format_ARGB32);
+    int w = (int) (800 * XY_RATIO);
+    QImage newImage(w, 800, QImage::Format_ARGB32);
 
-    int paintBlockSizeX = BLOCK_SIZE_X / 5;
-    int paintBlockSizeY = BLOCK_SIZE_Y / 5;
+    int paintBlockSizeX = getPaintBlockSize().width();
+    int paintBlockSizeY = getPaintBlockSize().height();
 
     newImage.fill(0);
 
@@ -586,6 +710,8 @@ QImage TzuraImage::render(int layer, bool grid)
             {
                 if (ImgArray[0]->at(i,j) == 0) color.setNamedColor("Black");
                 if (ImgArray[0]->at(i,j) == 1) color.setNamedColor("White");
+
+                //if (ImgArray[0]->at(i,j) == 3) color.setNamedColor("Brown");
             }
 
             if (layer == 2) //Blocks' layer
@@ -645,7 +771,7 @@ QImage * TzuraImage::getIM()
 
 QSize TzuraImage::getPaintBlockSize()
 {
-    return QSize(BLOCK_SIZE_X / 5, BLOCK_SIZE_Y / 5);
+    return QSize(BLOCK_SIZE_X / 9, BLOCK_SIZE_Y / 9);
 }
 
 void TzuraImage::setArrayPoint(int x, int y, int val)

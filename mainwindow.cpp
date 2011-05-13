@@ -82,7 +82,7 @@ MainWindow::MainWindow(QWidget * parent /*,  QString path */) : QMainWindow(pare
 
     tz = NULL;
 
-    connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(showHelp()));
+    ui->tabWidget->setCornerWidget(ui->proglabel);
 }
 
 MainWindow::~MainWindow()
@@ -131,7 +131,7 @@ void MainWindow::on_prevBTN_clicked()
 
         int n = QString(rx.cap(1)).toInt();
 
-        if (n > 0) newfile = cur.replace(rx, "a" + QString::number(n - 1) + ".png");
+        if (n >= 0) newfile = cur.replace(rx, "a" + QString::number(n - 1) + ".png");
 
         qDebug() << newfile;
     }
@@ -160,7 +160,7 @@ void MainWindow::on_nextBTN_clicked()
 
         int n = QString(rx.cap(1)).toInt();
 
-        if (n > 0) newfile = cur.replace(rx, "a" + QString::number(n + 1) + ".png");
+        if (n >= 0) newfile = cur.replace(rx, "a" + QString::number(n + 1) + ".png");
 
         qDebug() << newfile;
     }
@@ -190,7 +190,10 @@ void MainWindow::process()
 
     ui->label_2->setPixmap(QPixmap::fromImage(tz->render(0)));
 
-    ui->label_3->setPixmap(QPixmap::fromImage(*tz->getIM()));
+    QImage im = *tz->getIM();
+    im = im.scaledToHeight(760);
+
+    ui->label_3->setPixmap(QPixmap::fromImage(im));
 }
 
 
@@ -223,7 +226,7 @@ void MainWindow::on_blackBTN_clicked(bool checked)
 
     if (checked)
     {
-        QCursor cur(QPixmap(":/Icons/Icons/Black.png"));
+        QCursor cur(QPixmap(":/Icons/Icons/Black.png").scaledToHeight(10));
 
         QApplication::restoreOverrideCursor();
         QApplication::setOverrideCursor(cur);
@@ -243,7 +246,7 @@ void MainWindow::on_whiteBTN_clicked(bool checked)
 
     if (checked)
     {
-        QCursor cur(QPixmap(":/Icons/Icons/White.png"));
+        QCursor cur(QPixmap(":/Icons/Icons/White.png").scaledToHeight(10));
 
         QApplication::restoreOverrideCursor();
         QApplication::setOverrideCursor(cur);
@@ -309,4 +312,9 @@ void MainWindow::on_saveLayoutBTN_clicked()
         f.write(tz->blockOutput().toUtf8());
         f.close();
     }
+}
+
+void MainWindow::on_toolButton_clicked()
+{
+    showHelp();
 }

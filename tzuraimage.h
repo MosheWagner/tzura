@@ -93,6 +93,9 @@ private:
     // (By the given size)
     void strongFilter(int s);
 
+    //Crop the image so only the internal gmara-rashi-tosfot square is left
+    void cropEdges();
+
     //Tries to remove the 'last word of block' that bothers the detection
     void lastWordInBlockFilter();
 
