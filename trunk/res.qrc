@@ -6,5 +6,6 @@
         <file>Icons/previous.png</file>
         <file>Icons/next.png</file>
         <file>Icons/White.png</file>
+        <file>Icons/help.png</file>
     </qresource>
 </RCC>
