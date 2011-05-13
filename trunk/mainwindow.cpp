@@ -41,12 +41,10 @@
 # [-] Build rough array representing the image
 # [?] Filter noises out of the array
 
-# [ ] Roughly detect internal square of Gmara-Rashi-Tosfot
+# [-] Roughly detect internal square of Gmara-Rashi-Tosfot
     -> Bottom left corner, then top left, and finally top right
-# [ ] Perfect the previous detection and cut image exactly by the lines (leaving the lines in the image)
 
-
-# [V] Start 'expanding' white blocks, until shapes are formed
+# [-] Start 'expanding' white blocks, until shapes are formed
 # [-] Remove too small / blocks of last-line in block words
 
 # [-] Link connected rectangles to form blocks

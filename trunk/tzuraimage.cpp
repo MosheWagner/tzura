@@ -104,29 +104,6 @@ void TzuraImage::process(bool firstTime)
     SingleLineYFilter();
     SingleLineXFilter();
 
-    //connectivityFilter();
-
-    /*
-    //Show pixilized image
-    nimg.fill(0);
-    nimg = nimg.scaledToHeight(1);
-
-    update("Painting blocks...");
-    paintBlocks(&nimg, BLOCK_SIZE_X, BLOCK_SIZE_Y);
-
-
-    update("Drawing grid...");
-    drawGrid(&nimg, BLOCK_SIZE_X, BLOCK_SIZE_Y);
-
-    //Show image
-    nimg = nimg.scaledToHeight(1500);
-    ui->label_2->setPixmap(QPixmap::fromImage(nimg));
-    */
-
-
-
-    /*
-     /////////////
 
     //See if it has a layout file already
     QFile f(imagePath.replace(".png", ".layout"));
@@ -136,7 +113,6 @@ void TzuraImage::process(bool firstTime)
         drawSavedRects(imagePath.replace(".png", ".layout"));
     }
     else
-    */
     {
 
         //Growing-Squares method
@@ -144,25 +120,26 @@ void TzuraImage::process(bool firstTime)
 
         findSquares(squareBorderSensitivity, 10);
 
-        //addSquares();
-
         findSquares(squareBorderSensitivity, 2);
 
         joinSquares();
 
         makeNewBlocks();
     }
+
+
     /*
-    nimg.fill(0);
-    nimg = nimg.scaledToHeight(1);
+    //DEBUG:
+    //Show square seed
+    for (int i=0; i<squareList.size(); i++)
+    {
+        expandingSquare square = squareList[i];
+        for (int k=square.seed.x(); k<square.seed.x() + square.seedSize; k++)
+            for (int l=square.seed.y(); l<square.seed.y() + square.seedSize; l++)
+                ImgArray[2]->set(k,l,9);
+    }
+    */
 
-    update("Painting blocks...");
-    paintBlocks(&nimg, BLOCK_SIZE_X, BLOCK_SIZE_Y);
-
-    //Show image
-    nimg = nimg.scaledToHeight(1500);
-    ui->label->setPixmap(QPixmap::fromImage(nimg));
-*/
     emit message("Done!");
 
 }
@@ -401,7 +378,7 @@ void TzuraImage::cropEdges()
                 for (int n=0; n<RES_X; n++)
                 {
                     //Cheating...
-                    if ( abs(RES_X /2 - n) < 20 && j - m < 3) ImgArray[0]->set(n,m,0);
+                    if ( abs(RES_X /2 - n) < 20 && j - m < 4) ImgArray[0]->set(n,m,0);
                     else ImgArray[0]->set(n,m,3);
                 }
             }
@@ -535,9 +512,19 @@ void TzuraImage::findSquares(float MIN_SATURATION, int seedSize)
     {
         for (int j=1; j<RES_Y-seedSize - 1; j++)
         {
+            //TODO: Maybe make this a 90% test and not 100% ?
+
             //Make sure we have a black block
             bool isWhite = true;
             for (int s=0; s<seedSize; s++) for (int g=0; g<seedSize; g++) if (ImgArray[1]->at(i+s,j+g) != 1) isWhite = false;
+/*
+ //And start in a corner only
+
+            int c = 0;
+            for (int v=-1; v < seedSize + 1; v++) for (int x=-1; x<seedSize + 1; x++) if (ImgArray[0]->at(v + i,x + j) == 0) c++;
+            //More than one axis has to have black points
+            if ( c < seedSize * 1.2) isWhite = false;
+*/
 
             if (isWhite)
             {

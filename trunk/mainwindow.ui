@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>721</width>
+    <width>767</width>
     <height>622</height>
    </rect>
   </property>
@@ -99,7 +99,7 @@
          <double>1.000000000000000</double>
         </property>
         <property name="singleStep">
-         <double>0.100000000000000</double>
+         <double>0.020000000000000</double>
         </property>
         <property name="value">
          <double>0.800000000000000</double>
@@ -174,7 +174,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>693</width>
+             <width>739</width>
              <height>468</height>
             </rect>
            </property>
@@ -320,8 +320,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>693</width>
-             <height>424</height>
+             <width>96</width>
+             <height>35</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">

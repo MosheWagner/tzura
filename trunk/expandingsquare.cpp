@@ -53,7 +53,6 @@ void expandingSquare::Expand(QPoint p, int sSize, float MIN_SATURATION, ImageArr
         for (int d=0; d<4; d++)
         {
             int dir = d;
-            //if (d>4) dir = 1;
 
             QPoint np1; QPoint np2;
 
