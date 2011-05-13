@@ -401,7 +401,7 @@ void TzuraImage::cropEdges()
                 for (int n=0; n<RES_X; n++)
                 {
                     //Cheating...
-                    if ( abs(RES_X /2 - n) < 20) ImgArray[0]->set(n,m,0);
+                    if ( abs(RES_X /2 - n) < 20 && j - m < 3) ImgArray[0]->set(n,m,0);
                     else ImgArray[0]->set(n,m,3);
                 }
             }
