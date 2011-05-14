@@ -25,8 +25,16 @@
 // Note: Points in QImage (and other stuff too), start from the (user's) top left.
 // -----------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------
+// Almost works!
+//
+// Time test:
+// Brachot took 27 minutes. (2 pages not done)
+// Comes out about 21 hours for the whole shas.
+// -------------------------------------------------------------------------------
 
-//TODO: Add file names to '.layout' files
+
+//TODO: Add file names to '.layout' files (to know which masechet it's from)
 
 /*
 @ Basic 'expanding blocks' algorithm:
@@ -70,7 +78,6 @@ MainWindow::MainWindow(QWidget * parent /*,  QString path */) : QMainWindow(pare
 
     QApplication::processEvents();
 
-
     showHelp();
 
 
@@ -81,6 +88,8 @@ MainWindow::MainWindow(QWidget * parent /*,  QString path */) : QMainWindow(pare
     tz = NULL;
 
     ui->tabWidget->setCornerWidget(ui->proglabel);
+
+    brushSize = 9;
 }
 
 MainWindow::~MainWindow()
@@ -224,7 +233,7 @@ void MainWindow::on_blackBTN_clicked(bool checked)
 
     if (checked)
     {
-        QCursor cur(QPixmap(":/Icons/Icons/Black.png").scaledToHeight(10));
+        QCursor cur(QPixmap(":/Icons/Icons/Black.png").scaledToHeight(brushSize));
 
         QApplication::restoreOverrideCursor();
         QApplication::setOverrideCursor(cur);
@@ -244,7 +253,7 @@ void MainWindow::on_whiteBTN_clicked(bool checked)
 
     if (checked)
     {
-        QCursor cur(QPixmap(":/Icons/Icons/White.png").scaledToHeight(10));
+        QCursor cur(QPixmap(":/Icons/Icons/White.png").scaledToHeight(brushSize));
 
         QApplication::restoreOverrideCursor();
         QApplication::setOverrideCursor(cur);
@@ -278,7 +287,6 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 }
 
 
-
 void MainWindow::valueChangeRequest(QPoint pos)
 {
     //Find where the click was, relative to the labels
@@ -293,11 +301,21 @@ void MainWindow::valueChangeRequest(QPoint pos)
     x = (p.x() / blockSize.width()) - 1;
     y = (p.y() / blockSize.height()) - 1 ;
 
+    int size = (QApplication::overrideCursor()->pixmap().size().width() / 3);
+
+    int n = (size / 2) - 1;
+
     //Update the image array
-    for (int a=0; a<3; a++) for (int b=0; b<3; b++)  tz->setArrayPoint(x + a, y + b,paintMode);
+    for (int a= n * -1; a<size - n; a++) for (int b=n * -1; b<size - n; b++)
+    {
+        tz->setArrayPoint(x + a, y + b,paintMode);
+    }
 
     //Show how it looks now
     ui->label_2->setPixmap(QPixmap::fromImage(tz->render(0)));
+
+
+    QApplication::processEvents();
 }
 
 void MainWindow::on_saveLayoutBTN_clicked()
@@ -310,9 +328,49 @@ void MainWindow::on_saveLayoutBTN_clicked()
         f.write(tz->blockOutput().toUtf8());
         f.close();
     }
+
+    on_nextBTN_clicked();
 }
 
 void MainWindow::on_toolButton_clicked()
 {
     showHelp();
+}
+
+void MainWindow::on_plusBTN_clicked()
+{
+    brushSize += 3;
+
+    QCursor cur(QApplication::overrideCursor()->pixmap().scaledToHeight(brushSize));
+
+    QApplication::restoreOverrideCursor();
+    QApplication::setOverrideCursor(cur);
+}
+
+void MainWindow::on_minusBTN_clicked()
+{
+    if (brushSize > 3) brushSize -= 3;
+
+    QCursor cur(QApplication::overrideCursor()->pixmap().scaledToHeight(brushSize));
+
+    QApplication::restoreOverrideCursor();
+    QApplication::setOverrideCursor(cur);
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+    if (index == 0) QApplication::restoreOverrideCursor();
+    else
+    {
+        if (ui->whiteBTN->isChecked())
+        {
+            QCursor cur(QPixmap(":/Icons/Icons/White.png").scaledToHeight(brushSize));
+            QApplication::setOverrideCursor(cur);
+        }
+        else if (ui->blackBTN->isChecked())
+        {
+            QCursor cur(QPixmap(":/Icons/Icons/Black.png").scaledToHeight(brushSize));
+            QApplication::setOverrideCursor(cur);
+        }
+    }
 }

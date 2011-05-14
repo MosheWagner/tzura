@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri May 13 16:13:13 2011
+** Created: Sat May 14 23:01:16 2011
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -24,9 +24,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QSpacerItem>
-#include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
-#include <QtGui/QToolBar>
 #include <QtGui/QToolButton>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -50,7 +48,6 @@ public:
     QPushButton *reprocBTN;
     QToolButton *saveLayoutBTN;
     QToolButton *toolButton;
-    QLabel *proglabel;
     QTabWidget *tabWidget;
     QWidget *tab;
     QHBoxLayout *horizontalLayout_3;
@@ -65,17 +62,20 @@ public:
     QLabel *label;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_2;
+    QLabel *proglabel;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_5;
     QToolButton *whiteBTN;
     QToolButton *blackBTN;
+    QLabel *label_6;
+    QVBoxLayout *verticalLayout_3;
+    QToolButton *plusBTN;
+    QToolButton *minusBTN;
     QSpacerItem *horizontalSpacer_2;
     QScrollArea *scrollArea_2;
     QWidget *scrollAreaWidgetContents_2;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_2;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -87,16 +87,19 @@ public:
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
+        verticalLayout->setSpacing(2);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(1, 1, 1, 0);
+        verticalLayout->setContentsMargins(0, 1, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(20);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(-1, 0, -1, -1);
         openfileBTN = new QPushButton(centralWidget);
         openfileBTN->setObjectName(QString::fromUtf8("openfileBTN"));
+        QFont font;
+        font.setPointSize(9);
+        openfileBTN->setFont(font);
 
         horizontalLayout->addWidget(openfileBTN);
 
@@ -127,11 +130,13 @@ public:
 
         label_4 = new QLabel(centralWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setFont(font);
 
         horizontalLayout->addWidget(label_4);
 
         satSpinBox = new QDoubleSpinBox(centralWidget);
         satSpinBox->setObjectName(QString::fromUtf8("satSpinBox"));
+        satSpinBox->setFont(font);
         satSpinBox->setDecimals(2);
         satSpinBox->setMaximum(1);
         satSpinBox->setSingleStep(0.02);
@@ -141,14 +146,17 @@ public:
 
         reprocBTN = new QPushButton(centralWidget);
         reprocBTN->setObjectName(QString::fromUtf8("reprocBTN"));
+        reprocBTN->setFont(font);
 
         horizontalLayout->addWidget(reprocBTN);
 
         saveLayoutBTN = new QToolButton(centralWidget);
         saveLayoutBTN->setObjectName(QString::fromUtf8("saveLayoutBTN"));
+        saveLayoutBTN->setFont(font);
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/Icons/Icons/button_accept.png"), QSize(), QIcon::Normal, QIcon::Off);
         saveLayoutBTN->setIcon(icon2);
+        saveLayoutBTN->setIconSize(QSize(40, 16));
         saveLayoutBTN->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
         horizontalLayout->addWidget(saveLayoutBTN);
@@ -164,33 +172,23 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        proglabel = new QLabel(centralWidget);
-        proglabel->setObjectName(QString::fromUtf8("proglabel"));
-        QFont font;
-        font.setPointSize(10);
-        font.setBold(false);
-        font.setWeight(50);
-        proglabel->setFont(font);
-
-        verticalLayout->addWidget(proglabel);
-
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
         horizontalLayout_3 = new QHBoxLayout(tab);
         horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         scrollArea = new QScrollArea(tab);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 739, 468));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 759, 560));
         horizontalLayout_2 = new QHBoxLayout(scrollAreaWidgetContents);
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setContentsMargins(2, 2, 2, 2);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         groupBox = new QGroupBox(scrollAreaWidgetContents);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -233,8 +231,18 @@ public:
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         verticalLayout_2 = new QVBoxLayout(tab_2);
         verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setContentsMargins(2, 2, 2, 2);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        proglabel = new QLabel(tab_2);
+        proglabel->setObjectName(QString::fromUtf8("proglabel"));
+        QFont font2;
+        font2.setPointSize(10);
+        font2.setBold(false);
+        font2.setWeight(50);
+        proglabel->setFont(font2);
+
+        verticalLayout_2->addWidget(proglabel);
+
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
@@ -246,12 +254,12 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
         label_5->setSizePolicy(sizePolicy);
-        QFont font2;
-        font2.setPointSize(10);
-        font2.setBold(false);
-        font2.setItalic(true);
-        font2.setWeight(50);
-        label_5->setFont(font2);
+        QFont font3;
+        font3.setPointSize(10);
+        font3.setBold(false);
+        font3.setItalic(true);
+        font3.setWeight(50);
+        label_5->setFont(font3);
 
         horizontalLayout_5->addWidget(label_5);
 
@@ -274,6 +282,35 @@ public:
 
         horizontalLayout_5->addWidget(blackBTN);
 
+        label_6 = new QLabel(tab_2);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        QFont font4;
+        font4.setPointSize(8);
+        font4.setItalic(true);
+        label_6->setFont(font4);
+
+        horizontalLayout_5->addWidget(label_6);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, -1, -1, -1);
+        plusBTN = new QToolButton(tab_2);
+        plusBTN->setObjectName(QString::fromUtf8("plusBTN"));
+        plusBTN->setMaximumSize(QSize(14, 14));
+        plusBTN->setIconSize(QSize(8, 8));
+
+        verticalLayout_3->addWidget(plusBTN);
+
+        minusBTN = new QToolButton(tab_2);
+        minusBTN->setObjectName(QString::fromUtf8("minusBTN"));
+        minusBTN->setMaximumSize(QSize(14, 14));
+
+        verticalLayout_3->addWidget(minusBTN);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_3);
+
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_5->addItem(horizontalSpacer_2);
@@ -286,10 +323,10 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 96, 35));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 755, 478));
         horizontalLayout_4 = new QHBoxLayout(scrollAreaWidgetContents_2);
         horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setContentsMargins(2, 2, 2, 2);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         label_2 = new QLabel(scrollAreaWidgetContents_2);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -305,12 +342,6 @@ public:
         verticalLayout->addWidget(tabWidget);
 
         MainWindow->setCentralWidget(centralWidget);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(MainWindow);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        MainWindow->setStatusBar(statusBar);
 
         retranslateUi(MainWindow);
 
@@ -329,17 +360,20 @@ public:
         nextBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindow", "Square strictness:", 0, QApplication::UnicodeUTF8));
         reprocBTN->setText(QApplication::translate("MainWindow", "Re-process", 0, QApplication::UnicodeUTF8));
-        saveLayoutBTN->setText(QApplication::translate("MainWindow", "Save layout", 0, QApplication::UnicodeUTF8));
+        saveLayoutBTN->setText(QApplication::translate("MainWindow", "Save layout and next", 0, QApplication::UnicodeUTF8));
         toolButton->setText(QString());
-        proglabel->setText(QApplication::translate("MainWindow", "proglbl", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("MainWindow", "Original page:", 0, QApplication::UnicodeUTF8));
         label_3->setText(QString());
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Detected blocks:", 0, QApplication::UnicodeUTF8));
         label->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Blocks", 0, QApplication::UnicodeUTF8));
+        proglabel->setText(QString());
         label_5->setText(QApplication::translate("MainWindow", "Perfect detection:", 0, QApplication::UnicodeUTF8));
         whiteBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         blackBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("MainWindow", "Brush size:", 0, QApplication::UnicodeUTF8));
+        plusBTN->setText(QApplication::translate("MainWindow", "+", 0, QApplication::UnicodeUTF8));
+        minusBTN->setText(QApplication::translate("MainWindow", "-", 0, QApplication::UnicodeUTF8));
         label_2->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Pixeles", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
