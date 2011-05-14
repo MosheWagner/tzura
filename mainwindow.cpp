@@ -160,14 +160,14 @@ void MainWindow::on_nextBTN_clicked()
     QString cur = ui->fileLine->text();
     QString newfile = cur;
 
-    QRegExp rx("a(\\d+).png");
+    QRegExp rx("([a-zA-Z].)(\\d+).png");
     int pos = rx.indexIn(cur);
     if (pos > -1)
     {
 
-        int n = QString(rx.cap(1)).toInt();
+        int n = QString(rx.cap(2)).toInt();
 
-        if (n >= 0) newfile = cur.replace(rx, "a" + QString::number(n + 1) + ".png");
+        if (n >= 0) newfile = cur.replace(rx, rx.cap(1) + QString::number(n + 1) + ".png");
 
         qDebug() << newfile;
     }
