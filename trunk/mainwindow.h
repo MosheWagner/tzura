@@ -44,11 +44,16 @@ private:
 
     void process();
 
+    int brushSize;
+
 public slots:
     //Prints a message to both console and message label
     void update(QString message);
 
 private slots:
+    void on_tabWidget_currentChanged(int index);
+    void on_minusBTN_clicked();
+    void on_plusBTN_clicked();
     void on_toolButton_clicked();
     void on_nextBTN_clicked();
     void on_prevBTN_clicked();

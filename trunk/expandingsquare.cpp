@@ -32,7 +32,7 @@ void expandingSquare::Expand(QPoint p, int sSize, float MIN_SATURATION, ImageArr
     setBottomRight(QPoint(p.x() + seedSize, p.y() + seedSize));
 
     //Invalid
-    if (right() > RES_X - 5 || bottom() > RES_Y - 5 || left() < 5 || top() < 5)
+    if (right() > RES_X - 1|| bottom() > RES_Y - 1 || left() < 1 || top() < 1)
     {
         //Quit here
         setTopLeft(QPoint(0,0));
@@ -79,9 +79,9 @@ void expandingSquare::Expand(QPoint p, int sSize, float MIN_SATURATION, ImageArr
                 np1.rx() = left() - 1; np2.rx() = left() - 1;
             }
 
-            if (np1.x() < 10 || np1.x() > RES_X - 10 || np1.y() < 10 || np1.y() > RES_Y - 10)
+            if (np1.x() < 2 || np1.x() > RES_X - 1 || np1.y() < 2 || np1.y() > RES_Y - 1)
                 break;
-            if (np2.x() < 10 || np2.x() > RES_X - 10 || np2.y() < 10 || np2.y() > RES_Y - 10)
+            if (np2.x() < 2 || np2.x() > RES_X - 1 || np2.y() < 2 || np2.y() > RES_Y - 1)
                 break;
 
             //See if this should be added

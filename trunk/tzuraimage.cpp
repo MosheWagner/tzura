@@ -111,6 +111,8 @@ void TzuraImage::process(bool firstTime)
     if (f.exists() && firstTime)
     {
         drawSavedRects(imagePath.replace(".png", ".layout"));
+
+        emit message("Displaying saved page layout. Click re-process to ignore it.");
     }
     else
     {
@@ -125,6 +127,8 @@ void TzuraImage::process(bool firstTime)
         joinSquares();
 
         makeNewBlocks();
+
+        emit message("Done!");
     }
 
 
@@ -139,8 +143,6 @@ void TzuraImage::process(bool firstTime)
                 ImgArray[2]->set(k,l,9);
     }
     */
-
-    emit message("Done!");
 
 }
 
@@ -659,19 +661,6 @@ void TzuraImage::makeNewBlocks()
     }
 }
 
-//
-
-
-/*
-void TzuraImage::addSquares()
-{
-    for (int i=0; i<squareList.size(); i++)
-    {
-        expandingSquare square = squareList[i];
-        for (int s=square.left(); s<=square.right(); s++) for (int g=square.top(); g<=square.bottom(); g++) ImgArray[1]->set(s,g,12);
-    }
-}
-*/
 
 //Paint the blocks so they look cool
 QImage TzuraImage::render(int layer, bool grid)
