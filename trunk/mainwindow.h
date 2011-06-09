@@ -43,6 +43,8 @@ private:
     int paintMode;
 
     void process();
+    void showDetection();
+    void showBlockArray();
 
     int brushSize;
 

@@ -15,6 +15,9 @@ Tzura exists for two reasons:
 Tzura is still a pre-alpha release. Not only does it not fully detect the shapes on it's own, it also may crash and not work all together.
 
 
+To convert a pdf file of a masechet into images for Tzura, run:
+convert [Masecet].pdf [Masecet]/%d.png
+
 ----
 
 Tzura was written by Moshe Wagner. <moshe.wagner@gmail.com>

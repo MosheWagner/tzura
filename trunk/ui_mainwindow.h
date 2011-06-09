@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat May 14 23:01:16 2011
+** Created: Thu Jun 9 22:08:43 2011
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,7 +15,6 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QDoubleSpinBox>
-#include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
@@ -54,11 +53,6 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QHBoxLayout *horizontalLayout_2;
-    QGroupBox *groupBox;
-    QHBoxLayout *horizontalLayout_6;
-    QLabel *label_3;
-    QGroupBox *groupBox_2;
-    QHBoxLayout *horizontalLayout_7;
     QLabel *label;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_2;
@@ -81,7 +75,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(767, 622);
+        MainWindow->resize(799, 622);
         actionHelp = new QAction(MainWindow);
         actionHelp->setObjectName(QString::fromUtf8("actionHelp"));
         centralWidget = new QWidget(MainWindow);
@@ -185,42 +179,15 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 759, 560));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 791, 560));
         horizontalLayout_2 = new QHBoxLayout(scrollAreaWidgetContents);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(2, 2, 2, 2);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        groupBox = new QGroupBox(scrollAreaWidgetContents);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        QFont font1;
-        font1.setPointSize(7);
-        groupBox->setFont(font1);
-        horizontalLayout_6 = new QHBoxLayout(groupBox);
-        horizontalLayout_6->setSpacing(6);
-        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        label_3 = new QLabel(groupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        horizontalLayout_6->addWidget(label_3);
-
-
-        horizontalLayout_2->addWidget(groupBox);
-
-        groupBox_2 = new QGroupBox(scrollAreaWidgetContents);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setFont(font1);
-        horizontalLayout_7 = new QHBoxLayout(groupBox_2);
-        horizontalLayout_7->setSpacing(6);
-        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        label = new QLabel(groupBox_2);
+        label = new QLabel(scrollAreaWidgetContents);
         label->setObjectName(QString::fromUtf8("label"));
 
-        horizontalLayout_7->addWidget(label);
-
-
-        horizontalLayout_2->addWidget(groupBox_2);
+        horizontalLayout_2->addWidget(label);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
 
@@ -235,11 +202,11 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         proglabel = new QLabel(tab_2);
         proglabel->setObjectName(QString::fromUtf8("proglabel"));
-        QFont font2;
-        font2.setPointSize(10);
-        font2.setBold(false);
-        font2.setWeight(50);
-        proglabel->setFont(font2);
+        QFont font1;
+        font1.setPointSize(10);
+        font1.setBold(false);
+        font1.setWeight(50);
+        proglabel->setFont(font1);
 
         verticalLayout_2->addWidget(proglabel);
 
@@ -254,12 +221,12 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
         label_5->setSizePolicy(sizePolicy);
-        QFont font3;
-        font3.setPointSize(10);
-        font3.setBold(false);
-        font3.setItalic(true);
-        font3.setWeight(50);
-        label_5->setFont(font3);
+        QFont font2;
+        font2.setPointSize(10);
+        font2.setBold(false);
+        font2.setItalic(true);
+        font2.setWeight(50);
+        label_5->setFont(font2);
 
         horizontalLayout_5->addWidget(label_5);
 
@@ -284,10 +251,10 @@ public:
 
         label_6 = new QLabel(tab_2);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        QFont font4;
-        font4.setPointSize(8);
-        font4.setItalic(true);
-        label_6->setFont(font4);
+        QFont font3;
+        font3.setPointSize(8);
+        font3.setItalic(true);
+        label_6->setFont(font3);
 
         horizontalLayout_5->addWidget(label_6);
 
@@ -323,7 +290,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 755, 478));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 787, 479));
         horizontalLayout_4 = new QHBoxLayout(scrollAreaWidgetContents_2);
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setContentsMargins(2, 2, 2, 2);
@@ -362,9 +329,6 @@ public:
         reprocBTN->setText(QApplication::translate("MainWindow", "Re-process", 0, QApplication::UnicodeUTF8));
         saveLayoutBTN->setText(QApplication::translate("MainWindow", "Save layout and next", 0, QApplication::UnicodeUTF8));
         toolButton->setText(QString());
-        groupBox->setTitle(QApplication::translate("MainWindow", "Original page:", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QString());
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "Detected blocks:", 0, QApplication::UnicodeUTF8));
         label->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Blocks", 0, QApplication::UnicodeUTF8));
         proglabel->setText(QString());

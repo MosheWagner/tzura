@@ -66,8 +66,12 @@ void TzuraImage::process(bool firstTime)
         RES_X  = 200;
         RES_Y = RES_X * XY_RATIO;
 
-        BLOCK_SIZE_X = im.width() / RES_X;
-        BLOCK_SIZE_Y = im.height() / RES_Y;
+        qDebug() << RES_Y;
+
+        BLOCK_SIZE_X = im.width() / RES_X + 1;
+        BLOCK_SIZE_Y = im.height() / RES_Y + 1;
+
+        im = im.scaledToWidth(BLOCK_SIZE_X * RES_X);
 
         //For images directly rendered from the pdf
         SATURATION_PERCENT = 0.01;
@@ -665,13 +669,12 @@ void TzuraImage::makeNewBlocks()
 //Paint the blocks so they look cool
 QImage TzuraImage::render(int layer, bool grid)
 {
-    int w = (int) (800 * XY_RATIO);
-    QImage newImage(w, 800, QImage::Format_ARGB32);
-
     int paintBlockSizeX = getPaintBlockSize().width();
     int paintBlockSizeY = getPaintBlockSize().height();
 
-    newImage.fill(0);
+
+    int w = RES_X * paintBlockSizeX;
+    QImage newImage(w, RES_Y * paintBlockSizeY, QImage::Format_ARGB32);
 
     QPainter painter(&newImage);
 
@@ -685,38 +688,49 @@ QImage TzuraImage::render(int layer, bool grid)
             if (layer == 0)
             {
                 if (ImgArray[0]->at(i,j) == 0) color.setNamedColor("Black");
+
                 if (ImgArray[0]->at(i,j) == 1) color.setNamedColor("White");
 
-                //if (ImgArray[0]->at(i,j) == 3) color.setNamedColor("Brown");
+                //Draw with slight transparacy
+                color.setAlpha(130);
+
+                painter.fillRect(QRect(QPoint(i*paintBlockSizeX, j*paintBlockSizeY), QPoint((i+1)*paintBlockSizeX, (j+1)*paintBlockSizeY)), color);
             }
 
             if (layer == 2) //Blocks' layer
             {
-
                 if (ImgArray[2]->at(i,j) == -1)
                 {
-                    if (ImgArray[0]->at(i,j) == 0) color.setNamedColor("Black");
-                    if (ImgArray[0]->at(i,j) == 1) color.setNamedColor("White");
+                    //if (ImgArray[0]->at(i,j) == 0) color.setNamedColor("Black");
+                    //if (ImgArray[0]->at(i,j) == 1) color.setNamedColor("White");
                 }
+                else
+                {
+                    if (ImgArray[2]->at(i,j) == 0) color.setNamedColor("Green");
+                    if (ImgArray[2]->at(i,j) == 1) color.setNamedColor("Blue");
+                    if (ImgArray[2]->at(i,j) == 2) color.setNamedColor("Red");
+                    if (ImgArray[2]->at(i,j) == 3) color.setNamedColor("Pink");
+                    if (ImgArray[2]->at(i,j) == 4) color.setNamedColor("Violet");
+                    if (ImgArray[2]->at(i,j) == 5) color.setNamedColor("Grey");
+                    if (ImgArray[2]->at(i,j) == 6) color.setNamedColor("Brown");
+                    if (ImgArray[2]->at(i,j) == 7) color.setNamedColor("Orange");
+                    if (ImgArray[2]->at(i,j) == 8) color.setNamedColor("Magenta");
+                    if (ImgArray[2]->at(i,j) == 9) color.setNamedColor("Cyan");
 
-                if (ImgArray[2]->at(i,j) == 0) color.setNamedColor("Green");
-                if (ImgArray[2]->at(i,j) == 1) color.setNamedColor("Blue");
-                if (ImgArray[2]->at(i,j) == 2) color.setNamedColor("Red");
-                if (ImgArray[2]->at(i,j) == 3) color.setNamedColor("Pink");
-                if (ImgArray[2]->at(i,j) == 4) color.setNamedColor("Violet");
-                if (ImgArray[2]->at(i,j) == 5) color.setNamedColor("Grey");
-                if (ImgArray[2]->at(i,j) == 6) color.setNamedColor("Brown");
-                if (ImgArray[2]->at(i,j) == 7) color.setNamedColor("Orange");
-                if (ImgArray[2]->at(i,j) == 8) color.setNamedColor("Magenta");
-                if (ImgArray[2]->at(i,j) == 9) color.setNamedColor("Cyan");
+                    if (ImgArray[2]->at(i,j) == 15) color.setNamedColor("Yellow");
 
-                if (ImgArray[2]->at(i,j) == 15) color.setNamedColor("Yellow");
+                    //Draw with transparacy
+                    color.setAlpha(50);
+
+                    painter.fillRect(QRect(QPoint(i*paintBlockSizeX, j*paintBlockSizeY), QPoint((i+1)*paintBlockSizeX, (j+1)*paintBlockSizeY)), color);
+                }
             }
 
-            painter.fillRect(QRect(QPoint(i*paintBlockSizeX, j*paintBlockSizeY), QPoint((i+1)*paintBlockSizeX, (j+1)*paintBlockSizeY)), color);
+
         }
     }
 
+    /*
     if (grid == true)
     {
         //Draw grid
@@ -735,6 +749,7 @@ QImage TzuraImage::render(int layer, bool grid)
             }
         }
     }
+    */
 
     return newImage;
 }
