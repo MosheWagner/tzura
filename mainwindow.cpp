@@ -193,17 +193,9 @@ void MainWindow::process()
 
     tz->process();
 
-    ui->label->setPixmap(QPixmap::fromImage(tz->render(2)));
-
-    ui->label_2->setPixmap(QPixmap::fromImage(tz->render(0)));
-
-    QImage im = *tz->getIM();
-    im = im.scaledToHeight(760);
-
-    ui->label_3->setPixmap(QPixmap::fromImage(im));
+    showDetection();
+    showBlockArray();
 }
-
-
 
 void MainWindow::on_reprocBTN_clicked()
 {
@@ -213,9 +205,42 @@ void MainWindow::on_reprocBTN_clicked()
 
         tz->process(false);
 
-        ui->label_2->setPixmap(QPixmap::fromImage(tz->render(0)));
-        ui->label->setPixmap(QPixmap::fromImage(tz->render(2)));
+        showDetection();
+        showBlockArray();
     }
+}
+
+void MainWindow::showDetection()
+{
+    //Display image with transparent detection above it
+    QPixmap Blocks(QPixmap::fromImage(tz->render(2)));
+
+    QImage im = *tz->getIM();
+    im = im.scaledToWidth(Blocks.width());
+    QPixmap PM(QPixmap::fromImage(im));
+
+
+
+    QPainter p(&PM);
+    p.drawPixmap(0,0, Blocks);
+
+    ui->label->setPixmap(PM);
+}
+
+void MainWindow::showBlockArray()
+{
+    //Display image with transparent blocks above it
+    QPixmap BlockArray(QPixmap::fromImage(tz->render(0)));
+
+    QImage im = *tz->getIM();
+    im = im.scaledToWidth(BlockArray.width());
+    QPixmap PM(QPixmap::fromImage(im));
+
+
+    QPainter p(&PM);
+    p.drawPixmap(0,0, BlockArray);
+
+    ui->label_2->setPixmap(PM);
 }
 
 //Prints a message to both console and message label
@@ -312,7 +337,7 @@ void MainWindow::valueChangeRequest(QPoint pos)
     }
 
     //Show how it looks now
-    ui->label_2->setPixmap(QPixmap::fromImage(tz->render(0)));
+    showBlockArray();
 
 
     QApplication::processEvents();
